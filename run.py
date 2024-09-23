@@ -24,12 +24,12 @@ tokenLifetime = os.environ.get('tokenLifetime', None)
 envs = ["dev","rc","prod"]
 mass = dict()
 
-# Проверка, что бы не задать один пароль на все окружения
-if env == "all":
-    password = ''
 # Перебор всех окружений
 for cur_env in envs:
     if env == "all" or env == cur_env:
+        # Проверка, что бы не задать один пароль на все окружения
+        if env == "all":
+            password = ''
         # Деграем cross-auth-backend по нужной ручке в нужном окружении
         if method == "client_add":
             password = cauth.add(cur_env,login,password,serviceName,values,tokenLifetime)
